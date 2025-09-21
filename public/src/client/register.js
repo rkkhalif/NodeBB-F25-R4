@@ -135,7 +135,9 @@ define('forum/register', [
 				if (results.every(obj => obj.status === 'rejected')) {
 					showSuccess(usernameInput, username_notify, successIcon);
 				} else {
-					showError(usernameInput, username_notify, '[[error:username-taken]]');
+					const currentUsername = username + 'suffix';
+					showError(usernameInput, username_notify, '[[error:username-taken]] Try "${currentUsername}" instead.').replace('${currentUsername', 
+						currentUsername);
 				}
 
 				callback();
