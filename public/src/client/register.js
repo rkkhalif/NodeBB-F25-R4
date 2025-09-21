@@ -121,6 +121,7 @@ define('forum/register', [
 		username_notify.text('');
 		const usernameInput = $('#username');
 		const userslug = slugify(username);
+
 		if (username.length < ajaxify.data.minimumUsernameLength || userslug.length < ajaxify.data.minimumUsernameLength) {
 			showError(usernameInput, username_notify, '[[error:username-too-short]]');
 		} else if (username.length > ajaxify.data.maximumUsernameLength) {
@@ -136,14 +137,16 @@ define('forum/register', [
 					showSuccess(usernameInput, username_notify, successIcon);
 				} else {
 					const currentUsername = username + 'suffix';
-					showError(usernameInput, username_notify, '[[error:username-taken]] Try "${currentUsername}" instead.').replace('${currentUsername', 
-						currentUsername);
+					showError(usernameInput, username_notify, `[[error:username-taken]]. Try "${currentUsername}" instead.`);
 				}
-
 				callback();
 			});
 		}
 	}
+
+		
+	
+
 
 	function validatePassword(password, password_confirm) {
 		const passwordInput = $('#password');
